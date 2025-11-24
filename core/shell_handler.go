@@ -1,8 +1,6 @@
 package core
 
-
-
-
+import "os"
 
 // this is the wrapper for shell handle
 type ShellHandler struct {
@@ -11,7 +9,15 @@ type ShellHandler struct {
 
 
 
-func NewShellHandler() *ShellHandler {
-	return nil
+func NewShellHandler(shell Shell) ShellHandler {
+	return ShellHandler {
+		CurrentShell: shell,
+	}
+}
+
+
+func WriteEnv(shell Shell, data string) error {
+	fileName := shell.ConfigPath	
+	return os.WriteFile(fileName, []byte(data), os.ModeAppend)
 }
 
