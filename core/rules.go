@@ -8,7 +8,7 @@ programs grows we need to add more functions and more logic and checking
 to work with so it would be better if we can use shell config with simple 
 rule declaration.
 
-Now why use rules in json from inside of go program.
+Now why use rules inside of go program.
 
 The reason is simple to avoid security checks
 This also can be break but not easily
@@ -26,22 +26,6 @@ Note: When we discover any better way we will implement that
 
 
 // Rules for working shells
-const RULES = `
-[
-    {
-        "name": "zsh",
-        "path": ".zshrc"
-    },
-    {
-        "name": "bash",
-        "path": ".bashrc"
-    },
-    {
-        "name": "fish",
-        "path": ".config/fish/conf.d/envset.fish"
-    }
-]
-`
 var ZSH Shell = NewShell("zsh", ".zshrc")
 var BASH Shell = NewShell("bash", ".bashrc")
 var FISH Shell = NewShell("fish", ".config/fish/conf.d/envset.fish")
