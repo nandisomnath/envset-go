@@ -26,6 +26,7 @@ Note: When we discover any better way we will implement that
 
 
 // Rules for working shells
+var UNKOWN_SHELL Shell = NewShell("", "")
 var ZSH Shell = NewShell("zsh", ".zshrc")
 var BASH Shell = NewShell("bash", ".bashrc")
 var FISH Shell = NewShell("fish", ".config/fish/conf.d/envset.fish")
