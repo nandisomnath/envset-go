@@ -8,13 +8,7 @@ import (
 
 
 func main() {
-	shell_handler, err := core.InitHandler();
-
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(shell_handler.S())
+	fmt.Println(core.FISH)
 
 }
 

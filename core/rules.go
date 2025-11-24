@@ -42,26 +42,9 @@ const RULES = `
     }
 ]
 `
+var ZSH Shell = NewShell("zsh", ".zshrc")
+var BASH Shell = NewShell("bash", ".bashrc")
+var FISH Shell = NewShell("fish", ".config/fish/conf.d/envset.fish")
 
-
-
-type ShellRules struct {
-    Shells []Shell
-}
-
-
-
-func NewShellRules() *ShellRules {
-    shell_rules := new(ShellRules)
-    shell_rules.Shells = make([]Shell, 0)
-    return shell_rules
-}
-
-
-
-func (shellRules *ShellRules) AddRules(name, path string)  {
-    shell := NewShell(name, path)
-    shellRules.Shells = append(shellRules.Shells, shell)
-}
 
 
