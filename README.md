@@ -139,4 +139,3 @@ If you want, I can:
 - add a LICENSE file to the repository with the same MIT text,
 - tailor the README to match the exact CLI flags and behavior of your implementation (if you paste the current help output of envset, I will update the Usage section to match),
 - generate an example install script or package manifest for common distros.
-```
