@@ -5,11 +5,7 @@ import (
 	"github.com/nandisomnath/envset/core"
 )
 
-
 func main() {
-	fmt.Println(core.FISH)
-
+	fmt.Println(core.Fish)
+	fmt.Println()
 }
-
-
-

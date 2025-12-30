@@ -1,21 +1,22 @@
 package core
 
-import "path"
-
-
-type Shell struct {
-	// name of the shell we are working with
-	Name string 
-	// config path where the main config file of that shell exists
-	ConfigPath string
+type Shell interface {
+	RemovePath()
+	AddPath()
+	InitSetup()
+	GetShellConfigPath() string
+	GetUserConfigPath() string
+	GetShellCode() string
 }
 
+type FishShell struct{}
 
-func NewShell(name, _path string) Shell {
-	return Shell {
-		ConfigPath: path.Clean(_path),
-		Name: name,
-	}
+func (sh FishShell) GetShellCode() string {
+	return ""
 }
 
-
+func (sh FishShell) InitSetup()                 {}
+func (sh FishShell) AddPath()                   {}
+func (sh FishShell) RemovePath()                {}
+func (sh FishShell) GetShellConfigPath() string { return "" }
+func (sh FishShell) GetUserConfigPath() string  { return "" }

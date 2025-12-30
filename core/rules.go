@@ -1,11 +1,10 @@
-package core
-
 /*
-envset needs rules for interacting with 
-shells config files, it can be done directly by checking which 
-shell we are using but that will limit new shell adding, as the 
+Package core
+envset needs rules for interacting with
+shells config files, it can be done directly by checking which
+shell we are using but that will limit new shell adding, as the
 programs grows we need to add more functions and more logic and checking
-to work with so it would be better if we can use shell config with simple 
+to work with so it would be better if we can use shell config with simple
 rule declaration.
 
 Now why use rules inside of go program.
@@ -19,17 +18,8 @@ for example if they change the path and make it traverse through '../' to go
 their desire location and effect and file. or Just copy you env
 That is the reason to do this.
 
-
 Note: When we discover any better way we will implement that
 */
-
-
+package core
 
 // Rules for working shells
-var UNKOWN_SHELL Shell = NewShell("", "")
-var ZSH Shell = NewShell("zsh", ".zshrc")
-var BASH Shell = NewShell("bash", ".bashrc")
-var FISH Shell = NewShell("fish", ".config/fish/conf.d/envset.fish")
-
-
-

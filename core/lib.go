@@ -6,22 +6,26 @@ import (
 )
 
 
+type ShellOptions int
+const (
+	Fish ShellOptions = iota 
+	Zsh
+	Bash
+	UnkownShell 
+)
 
 
 
-
-func GetShell() Shell {
-	
-	shell := os.Getenv("SHELL")
+func GetShell(shell: string) ShellOptions {
 
 	if strings.Contains(shell, "zsh") {
-		return ZSH
+		return Zsh 
 	} else if strings.Contains(shell, "bash") {
-		return BASH
+		return Bash 
 	} else if strings.Contains(shell, "fish") {
-		return FISH
+		return Fish 
 	} else {
-		return UNKOWN_SHELL
+		return 
 	}
 
 }
