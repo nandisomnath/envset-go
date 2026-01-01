@@ -44,8 +44,11 @@ func (sh FishShell) InitSetup() {
 
 
 
-func (sh FishShell) AddPath()    {}
+func (sh FishShell) AddPath()    {
+	
+}
 func (sh FishShell) RemovePath() {}
+
 func (sh FishShell) GetShellConfigPath() string {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
