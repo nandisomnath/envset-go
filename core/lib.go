@@ -1,12 +1,12 @@
 package core
 
 import (
-	"os"
 	"strings"
 )
 
 
 type ShellOptions int
+
 const (
 	Fish ShellOptions = iota 
 	Zsh
@@ -16,7 +16,7 @@ const (
 
 
 
-func GetShell(shell: string) ShellOptions {
+func GetShell(shell string) ShellOptions {
 
 	if strings.Contains(shell, "zsh") {
 		return Zsh 
@@ -25,7 +25,7 @@ func GetShell(shell: string) ShellOptions {
 	} else if strings.Contains(shell, "fish") {
 		return Fish 
 	} else {
-		return 
+		return UnkownShell
 	}
 
 }

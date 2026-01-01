@@ -1,11 +1,10 @@
-package main
+// package main
 
-import (
-	"fmt"
-	"github.com/nandisomnath/envset/core"
-)
+// import (
+// 	"fmt"
+// 	"github.com/nandisomnath/envset/core"
+// )
 
-func main() {
-	fmt.Println(core.Fish)
-	fmt.Println()
-}
+// func main() {
+// 	fmt.Println(core.Fish)
+// }
