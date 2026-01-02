@@ -8,16 +8,14 @@ import (
 	"strings"
 )
 
-type Shell interface {
-	RemovePath()
-	AddPath()
-	InitSetup()
-	GetShellConfigPath() string
-	GetUserConfigPath() string
-	GetShellCode() string
-}
+
 
 type FishShell struct{}
+
+func NewFishShell() FishShell {
+	return FishShell{}
+}
+
 
 func (sh FishShell) GetShellCode(env_value string) string {
 	return fmt.Sprintf("set -x PATH %s $PATH\n", env_value)
@@ -40,6 +38,9 @@ func (sh FishShell) InitSetup() {
 
 	shell_config_file := sh.GetShellConfigPath()
 	file, err := os.OpenFile(shell_config_file, os.O_APPEND | os.O_CREATE | os.O_WRONLY, 0644);
+	if err != nil {
+		panic(err.Error())
+	}
 	defer file.Close()
 	file.WriteString(fmt.Sprintf("source %s\n", user_conf_path))
 }
@@ -59,6 +60,7 @@ func (sh FishShell) AddPath(env_value string)    {
 	}
 }
 
+// TODO: handle the unwinding when a error occurs
 func (sh FishShell) RemovePath(env_value string) {
 	// all variables
 	user_conf_path := sh.GetUserConfigPath()

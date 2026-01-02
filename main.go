@@ -10,5 +10,6 @@ func main() {
 	pathValue := pflag.StringP("path", "p","", "folder path to add in $PATH variable")
 	shellValue := pflag.StringP("shell", "s","", "which shell the path will be added")
 	pflag.Parse()
+	
 	core.AddEnv(*shellValue, *pathValue, *removePath)
 }
