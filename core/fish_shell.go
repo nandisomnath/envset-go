@@ -22,49 +22,49 @@ func (sh FishShell) GetShellCode(env_value string) string {
 }
 
 func (sh FishShell) InitSetup() {
-	user_conf_path := sh.GetUserConfigPath()
-	user_config_folder := path.Dir(user_conf_path)
+	userConfPath := sh.GetUserConfigPath()
+	userConfigFolder := path.Dir(userConfPath)
 
-	err := os.MkdirAll(user_config_folder, 0755)
+	err := os.MkdirAll(userConfigFolder, 0755)
 	if err != nil {
 		panic(err.Error())
 	}
 	
 	// creating user config file in envset folder
-	_, err = os.Create(user_conf_path)
+	_, err = os.Create(userConfPath)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	shell_config_file := sh.GetShellConfigPath()
-	file, err := os.OpenFile(shell_config_file, os.O_APPEND | os.O_CREATE | os.O_WRONLY, 0644);
+	shellConfigFile := sh.GetShellConfigPath()
+	file, err := os.OpenFile(shellConfigFile, os.O_APPEND | os.O_CREATE | os.O_WRONLY, 0644);
 	if err != nil {
 		panic(err.Error())
 	}
 	defer file.Close()
-	file.WriteString(fmt.Sprintf("source %s\n", user_conf_path))
+	file.WriteString(fmt.Sprintf("source %s\n", userConfPath))
 }
 
 
 
 func (sh FishShell) AddPath(env_value string)    {
-	user_conf_path := sh.GetUserConfigPath()
-	user_conf_file, err := os.OpenFile(user_conf_path, os.O_APPEND|os.O_WRONLY, 0644)
+	userConfPath := sh.GetUserConfigPath()
+	userConfFile, err := os.OpenFile(userConfPath, os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		panic(err.Error())
 	}
 	shell_code := sh.GetShellCode(env_value)
-	_, err = user_conf_file.WriteString(shell_code)
+	_, err = userConfFile.WriteString(shell_code)
 	if err != nil {
 		panic(err.Error())
 	}
 }
 
 // TODO: handle the unwinding when a error occurs
-func (sh FishShell) RemovePath(env_value string) {
+func (sh FishShell) RemovePath(envValue string) {
 	// all variables
-	user_conf_path := sh.GetUserConfigPath()
-	shellCode := sh.GetShellCode(env_value)
+	userConfPath := sh.GetUserConfigPath()
+	shellCode := sh.GetShellCode(envValue)
 
 	// copy all strings in tmp file
 	tmpDir := os.TempDir()
@@ -74,13 +74,12 @@ func (sh FishShell) RemovePath(env_value string) {
 	}
 	defer tmpFile.Close()
 	tmpWriter := bufio.NewWriter(tmpFile)
-	userConfFileReaderFile, err := os.Open(user_conf_path)
+	userConfFileReaderFile, err := os.Open(userConfPath)
 	if err != nil {
 		panic(err.Error())
 	}
 	defer userConfFileReaderFile.Close()
 	userConfFileScanner := bufio.NewScanner(userConfFileReaderFile)
-
 	for userConfFileScanner.Scan() {
 		line := userConfFileScanner.Text()
 		if strings.TrimSpace(shellCode) != line {
@@ -90,10 +89,9 @@ func (sh FishShell) RemovePath(env_value string) {
 			}
 		}
 	}
-
 	// read from temp file and write it in userConf file
 	tmpFileReader := bufio.NewScanner(tmpFile)
-	userConfWriterFile, err := os.Create(user_conf_path)
+	userConfWriterFile, err := os.Create(userConfPath)
 	if err != nil {
 		panic(err.Error())
 	}

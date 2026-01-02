@@ -10,7 +10,7 @@ const (
 	Fish ShellOptions = iota
 	Zsh
 	Bash
-	UnkownShell
+	UnkownShell // this is just for handling returns
 )
 
 func GetShell(shell string) ShellOptions {
@@ -27,7 +27,7 @@ func GetShell(shell string) ShellOptions {
 
 }
 
-func AddEnv(shell, envValue string, remove bool) {
+func AddEnv(shell, envValue string, removePath bool) {
 	shellOption := GetShell(shell)
 
 	switch shellOption {
@@ -36,7 +36,7 @@ func AddEnv(shell, envValue string, remove bool) {
 	case Bash:
 		panic("Bash shell not implemented.")
 	case Fish:
-		FishShellHandler(envValue, remove)
+		FishShellHandler(envValue, removePath)
 	default:
 		panic("Unkown shell not implemented.")
 	}
