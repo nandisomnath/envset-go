@@ -32,7 +32,7 @@ func GetShell(shell string) ShellOptions {
 
 
 
-func AddEnv(envName, envValue string)  {
+func AddEnv(shell, envValue string, remove bool)  {
 	
 }
 
